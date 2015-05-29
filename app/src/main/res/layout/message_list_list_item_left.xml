@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/message_time_height"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Small Text"
+        android:textColor="@color/font_gray"
+        android:background="@drawable/content_pressed_selector"
+        android:textSize="12sp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/icon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/time"
+        android:layout_marginLeft="12dp"
+        android:src="@drawable/ic_lancher" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/linearLayout"
+        android:layout_toRightOf="@+id/icon"
+        xmlns:custom="http://schemas.android.com/apk/res/net.coding.program"
+        android:orientation="vertical"
+        android:background="@drawable/message_list_item_left"
+        android:visibility="visible"
+        android:layout_marginRight="57dp"
+        android:paddingLeft="17dp"
+        android:paddingTop="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="12dp">
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="this is content,buakdlkjfaskdfthis is content,buakdlkjfaskdfthis is content,buakdlkjfaskdfthis is content,buakdlkjfaskdf"
+            android:textColor="@color/font_black_content"
+            android:textSize="16sp" />
+
+        <net.coding.program.common.MinSizeImageView
+            custom:microSize="@dimen/image_single_micro_width"
+            custom:minWidth="@dimen/image_single_min_size"
+            custom:minHeight="@dimen/image_single_min_size"
+            android:id="@+id/imageSingle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:maxWidth="@dimen/image_single_width"
+            android:maxHeight="@dimen/image_single_width"
+            android:minWidth="@dimen/image_single_min_width"
+            android:minHeight="@dimen/image_single_min_width"
+            android:longClickable="true" />
+
+
+        <LinearLayout
+            android:id="@+id/imagesLayout0"
+            android:layout_width="wrap_content"
+            android:visibility="visible"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <include
+                layout="@layout/maopao_image"
+                android:id="@+id/image0" />
+
+            <include
+                layout="@layout/maopao_image"
+                android:id="@+id/image1" />
+
+            <include
+                layout="@layout/maopao_image"
+                android:id="@+id/image2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/imagesLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <include
+                layout="@layout/maopao_image"
+                android:id="@+id/image3" />
+
+            <include
+                layout="@layout/maopao_image"
+                android:id="@+id/image4" />
+
+            <include
+                layout="@layout/maopao_image"
+                android:id="@+id/image5" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_toRightOf="@id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/linearLayout"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="-42dp">
+
+        <View
+            android:id="@+id/resend"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:background="@drawable/ic_message_resend" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sending" />
+
+    </FrameLayout>
+
+
+</RelativeLayout>
