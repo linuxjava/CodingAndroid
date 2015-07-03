@@ -209,6 +209,10 @@ public class AccountInfo {
         return data;
     }
 
+    /**
+     * 应用内文件数据缓存
+     * @param <T>
+     */
     static class DataCache<T> {
 
         public final static String FILDER_GLOBAL = "FILDER_GLOBAL";

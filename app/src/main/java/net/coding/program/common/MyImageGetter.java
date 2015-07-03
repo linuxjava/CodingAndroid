@@ -32,6 +32,11 @@ public class MyImageGetter implements Html.ImageGetter {
         return drawable;
     }
 
+    /**
+     * 找到图片的名字
+     * @param s
+     * @return
+     */
     private String getPhotoName(String s) {
         if (s == null) {
             return "";

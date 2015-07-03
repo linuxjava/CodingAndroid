@@ -37,6 +37,7 @@ import org.json.JSONObject;
 public class BaseActivity extends UmengActivity implements NetworkCallback {
 
     protected LayoutInflater mInflater;
+    //封装的ImageLoad
     private ImageLoadTool imageLoadTool = new ImageLoadTool();
 
     private ProgressDialog mProgressDialog;

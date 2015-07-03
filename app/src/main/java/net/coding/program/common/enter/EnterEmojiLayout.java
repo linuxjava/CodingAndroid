@@ -36,6 +36,10 @@ public class EnterEmojiLayout extends EnterLayout {
     private int rootViewHigh = 0;
     private final View rootView;
 
+    /**
+     * Default:缺省模式下显示表情和monkey大图
+     * SmallOnly:只显示表情
+     */
     public static enum EmojiType {
         Default, SmallOnly
     }
@@ -51,6 +55,9 @@ public class EnterEmojiLayout extends EnterLayout {
             @Override
             public void onClick(View v) {
                 content.requestFocus();
+                /**
+                 * 控制键盘与表情的显示
+                 */
                 if (checkBoxEmoji.isChecked()) {
                     rootViewHigh = rootView.getHeight();
 
@@ -141,6 +148,7 @@ public class EnterEmojiLayout extends EnterLayout {
             }
         });
 
+        //指定触发icon的click事件
         selectEmoji.performClick();
 
         content.setOnClickListener(new View.OnClickListener() {
@@ -201,6 +209,10 @@ public class EnterEmojiLayout extends EnterLayout {
         super.hide();
     }
 
+    /**
+     * 设置icon页面切面提示小圆点
+     * @param count
+     */
     private void setIndicatorCount(int count) {
         emojiKeyboardIndicator.removeAllViews();
         int pointWidth = mActivity.getResources().getDimensionPixelSize(R.dimen.point_width);
@@ -215,6 +227,10 @@ public class EnterEmojiLayout extends EnterLayout {
         emojiKeyboardIndicator.getChildAt(0).setBackgroundResource(R.drawable.ic_point_select);
     }
 
+    /**
+     * 设置表情选择项的背景
+     * @param type
+     */
     private void setPressEmojiType(EmojiFragment.Type type) {
         final int colorNormal = 0xffffffff;
         final int colorPress = 0xffe8e8e8;

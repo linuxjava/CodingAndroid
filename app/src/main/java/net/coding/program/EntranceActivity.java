@@ -56,6 +56,7 @@ public class EntranceActivity extends BaseActivity {
 
     @AfterViews
     void init() {
+        //加载闪屏页面所需信息
         LoginBackground.PhotoItem photoItem = new LoginBackground(this).getPhoto();
         File file = photoItem.getCacheFile(this);
         getImageLoad().imageLoader.clearMemoryCache();
