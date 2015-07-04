@@ -529,19 +529,21 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
             if (convertView == null) {
                 holder = new ViewHolder();
                 convertView = mInflater.inflate(R.layout.fragment_maopao_list_item, parent, false);
-
+                //maopao整个item
                 holder.maopaoItem = convertView.findViewById(R.id.MaopaoItem);
                 holder.maopaoItem.setOnClickListener(mOnClickMaopaoItem);
-
+                //item头像
                 holder.icon = (ImageView) convertView.findViewById(R.id.icon);
                 holder.icon.setOnClickListener(mOnClickUser);
-
+                //用户昵称
                 holder.name = (TextView) convertView.findViewById(R.id.name);
+                //发表时间
                 holder.time = (TextView) convertView.findViewById(R.id.time);
-
+                //发表冒泡item的内容区域
                 holder.contentArea = new ContentArea(convertView, mOnClickMaopaoItem, onClickImage, myImageGetter, getImageLoad(), mPxImageWidth);
-
+                //整个like头像和评论区域
                 holder.commentLikeArea = convertView.findViewById(R.id.commentLikeArea);
+                //like头像区域
                 holder.likeUsersArea = new LikeUsersArea(convertView, MaopaoListFragment.this, getImageLoad(), mOnClickUser);
 
                 holder.location = (TextView) convertView.findViewById(R.id.location);
@@ -549,6 +551,7 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
                 holder.likeBtn = (CheckBox) convertView.findViewById(R.id.likeBtn);
                 holder.commentBtn = (CheckBox) convertView.findViewById(R.id.commentBtn);
                 holder.likeBtn.setTag(R.id.likeBtn, holder);
+                //like头像和评论区域之间的分割线
                 holder.likeAreaDivide = convertView.findViewById(R.id.likeAreaDivide);
                 holder.commentBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -559,7 +562,7 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
 
                 holder.maopaoDelete = convertView.findViewById(R.id.maopaoDelete);
                 holder.maopaoDelete.setOnClickListener(onClickDeleteMaopao);
-
+                //冒泡评论区域
                 holder.commentArea = new CommentArea(convertView, onClickComment, myImageGetter);
                 // 隐藏第一条评论的分割线
                 convertView.findViewById(R.id.comment0).findViewById(R.id.commentTopDivider).setVisibility(View.INVISIBLE);
@@ -570,18 +573,18 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
             }
 
             final Maopao.MaopaoObject data = (Maopao.MaopaoObject) getItem(position);
-
+            //显示点赞的所有用户的头像
             holder.likeUsersArea.likeUsersLayout.setTag(TAG_MAOPAO, data);
             holder.likeUsersArea.displayLikeUser();
-
+            //是否显示整个like头像和评论区域
             if (data.likes > 0 || data.comments > 0) {
                 holder.commentLikeArea.setVisibility(View.VISIBLE);
             } else {
                 holder.commentLikeArea.setVisibility(View.GONE);
             }
-
+            //显示地理位置
             MaopaoLocationArea.bind(holder.location, data);
-
+            //显示设备类型
             String device = data.device;
             if (!device.isEmpty()) {
                 final String format = "来自 %s";
@@ -591,19 +594,19 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
                 holder.photoType.setVisibility(View.GONE);
             }
             holder.photoType.setText(device);
-
+            //加载头像
             iconfromNetwork(holder.icon, data.owner.avatar);
             holder.icon.setTag(data.owner.global_key);
-
+            //显示名称
             holder.name.setText(data.owner.name);
             holder.name.setTag(data.owner.global_key);
 
             holder.maopaoItem.setTag(data);
-
+            //显示冒泡item内容
             holder.contentArea.setData(data);
 
             holder.time.setText(Global.dayToNow(data.created_at));
-
+            //like按钮
             holder.likeBtn.setOnCheckedChangeListener(null);
             holder.likeBtn.setChecked(data.liked);
             holder.likeBtn.setOnClickListener(new View.OnClickListener() {
@@ -616,13 +619,13 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
                     postNetwork(uri, new RequestParams(), HOST_GOOD, 0, data);
                 }
             });
-
+            //控制like头像和评论区域之间的分割线是否显示
             if (data.likes > 0) {
                 holder.likeAreaDivide.setVisibility(data.comments > 0 ? View.VISIBLE : View.INVISIBLE);
             }
 
             holder.commentBtn.setTag(data);
-
+            //如果这个item属于自己的，将显示删除按钮
             if (data.owner_id == (MyApp.sUserObject.id)) {
                 holder.maopaoDelete.setVisibility(View.VISIBLE);
                 holder.maopaoDelete.setTag(TAG_MAOPAO_ID, data.id);
@@ -630,7 +633,7 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
                 holder.maopaoDelete.setVisibility(View.INVISIBLE);
             }
 
-
+            //显示评论区域的内容
             holder.commentArea.displayContentData(data);
 
             //listview滑动到底部时，加载更多数据
