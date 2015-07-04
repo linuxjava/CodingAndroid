@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,18 +57,16 @@ import java.util.Calendar;
 
 @EFragment(R.layout.fragment_maopao_list)
 public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdate.LoadMore, StartActivity {
-
     ArrayList<Maopao.MaopaoObject> mData = new ArrayList<>();
     final String maopaoUrlFormat = Global.HOST + "/api/tweet/public_tweets?last_id=%s&sort=%s";
     final String friendUrl = Global.HOST + "/api/activities/user_tweet?last_id=%s";
 
     final String myUrl = Global.HOST + "/api/tweet/user_public?user_id=%s&last_id=%s";
 
-
     final String URI_COMMENT = Global.HOST + "/api/tweet/%s/comment";
-
+    //更新数据类型
     int id = UPDATE_ALL_INT;
-
+    //标识是否还有更多数据
     boolean mNoMore = false;
 
     public enum Type {
@@ -130,6 +129,7 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
         if (mData.isEmpty()) {
             showDialogLoading();
         } else {
+            Log.d("xiao1", "test1");
             setRefreshing(true);
         }
 
@@ -153,6 +153,7 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
 
         mFootUpdate.init(listView, mInflater, this);
         listView.setAdapter(mAdapter);
+        //拉取冒泡数据
         getNetwork(createUrl(), maopaoUrlFormat);
 
         ViewTreeObserver vto = listView.getViewTreeObserver();
@@ -229,6 +230,7 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
 
     @Override
     public void onRefresh() {
+        Log.d("xiao1", "onRefresh");
         initSetting();
         getNetwork(createUrl(), maopaoUrlFormat);
     }
@@ -354,10 +356,12 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
 
     @Override
     public void parseJson(int code, JSONObject respanse, String tag, int pos, Object data) throws JSONException {
+        Log.d("xiao1", "parseJson");
         if (tag.equals(maopaoUrlFormat)) {
             hideProgressDialog();
             setRefreshing(false);
             if (code == 0) {
+                //只有是UPDATE_ALL_INT时，才更新所有数据，否者时添加数据
                 if (id == UPDATE_ALL_INT) {
                     mData.clear();
                 }
@@ -368,6 +372,7 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
                     mData.add(item);
                 }
 
+                //冒泡的数据备份5条，可以加速缓存加载
                 ArrayList<Maopao.MaopaoObject> mSaveData = new ArrayList<>();
                 int minSize = Math.min(mData.size(), 5);
                 for (int i = 0; i < minSize; ++i) {
@@ -556,7 +561,6 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
                 // 隐藏第一条评论的分割线
                 convertView.findViewById(R.id.comment0).findViewById(R.id.commentTopDivider).setVisibility(View.INVISIBLE);
 
-
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -626,7 +630,7 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
 
             holder.commentArea.displayContentData(data);
 
-
+            //listview滑动到底部时，加载更多数据
             if (mData.size() - position <= 1) {
                 if (!mNoMore) {
                     getNetwork(createUrl(), maopaoUrlFormat);

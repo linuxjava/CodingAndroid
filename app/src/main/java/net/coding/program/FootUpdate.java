@@ -56,7 +56,7 @@ public class FootUpdate {
             Global.errorLog(e);
         }
 
-        mLayout.setVisibility(View.GONE);
+        mLayout.setVisibility(View.VISIBLE);
     }
 
     public void init(Object listView, LayoutInflater inflater, final LoadMore loadMore) {
@@ -88,7 +88,7 @@ public class FootUpdate {
             Global.errorLog(e);
         }
 
-        mLayout.setVisibility(View.GONE);
+        mLayout.setVisibility(View.VISIBLE);
     }
 
     public void showLoading() {

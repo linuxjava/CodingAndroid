@@ -25,7 +25,6 @@ public class ContentArea extends ContentAreaImages {
         imageSingle.setOnClickListener(onclickImage);
         imageSingle.setFocusable(false);
         imageSingle.setLongClickable(true);
-
     }
 
     @Override

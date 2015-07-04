@@ -66,7 +66,8 @@
                         android:textColorHint="@color/font_white_disable"
                         android:textCursorDrawable="@null"
                         android:textSize="18sp"
-                        custom:darkness="true" />
+                        custom:darkness="true"
+                        android:text="yjtbupt@163.com"/>
 
                     <net.coding.program.common.LoginEditText
                         android:id="@+id/editPassword"
@@ -83,7 +84,8 @@
                         android:textColorHint="@color/font_white_disable"
                         android:textCursorDrawable="@null"
                         android:textSize="18sp"
-                        custom:dark="true" />
+                        custom:dark="true"
+                        android:text="1qaz2wsx"/>
 
                     <RelativeLayout
                         android:id="@+id/captchaLayout"
