@@ -20,6 +20,7 @@ class EmojiconSpan extends DynamicDrawableSpan {
         super();
         mContext = context;
 
+        //判断图片是否是Monkey，monkey要使用大图
         String name = EmojiFragment.textToMonkdyMap.get(iconName);
         if (name == null) {
             name = iconName;

@@ -115,6 +115,7 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
         final int divide = 3;
         mPxImageWidth = Global.dpToPx(MyApp.sWidthDp - 62 - 34 - divide * 2) / 3;
 
+        //这是加载缓存信息
         mData = AccountInfo.loadMaopao(getActivity(), mType.toString(), userId);
 
         if (userId != 0) {
@@ -378,6 +379,8 @@ public class MaopaoListFragment extends RefreshBaseFragment implements FootUpdat
                 for (int i = 0; i < minSize; ++i) {
                     mSaveData.add(mData.get(i));
                 }
+
+                //保存信息
                 AccountInfo.saveMaopao(getActivity(), mSaveData, mType.toString(), userId);
 
                 if (jsonArray.length() == 0) {

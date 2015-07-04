@@ -25,7 +25,7 @@ public class EnterLayout {
     public TextView sendText;
     public ImageButton send;
     public EditText content;
-
+    //有文本和图片2种模式
     public enum Type {
         Default, TextOnly
     }
@@ -59,8 +59,7 @@ public class EnterLayout {
         }
 
         content = (EditText) activity.findViewById(R.id.comment);
-
-
+        //监听输入框的内容，改变发送按钮的颜色值
         content.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -73,7 +72,9 @@ public class EnterLayout {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count == 1 || count == 2) {
+                    //取出新输入的数据
                     String newString = s.subSequence(start, start + count).toString();
+                    //查找图片的名字
                     String imgName = EmojiTranslate.sEmojiMap.get(newString);
                     if (imgName != null) {
                         final String format = ":%s:";
