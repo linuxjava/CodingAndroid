@@ -23,7 +23,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class LikeUsersArea {
     Fragment fragment;
     Activity activity;
+    //整个点赞用户头像显示区域
     View likeUsersAllLayout;
+    //用户头像显示区域
     LinearLayout likeUsersLayout;
 
     ImageLoadTool imageLoadTool;
@@ -63,6 +65,9 @@ public class LikeUsersArea {
         }
     }
 
+    /**
+     * 它的目的是，预先计算出点赞人的头像数量和总数（但此时还没有显示头像，只是计算了它们的位置）
+     */
     private class MyPreDraw implements ViewTreeObserver.OnPreDrawListener {
 
         private LinearLayout layout;
@@ -90,7 +95,7 @@ public class LikeUsersArea {
 
             int imageWidth = Global.dpToPx(30);
             int imageMargin = Global.dpToPx(5);
-
+            //计算图片的margin
             int shenxia = width % (imageWidth + imageMargin);
             int count = width / (imageWidth + imageMargin);
             imageMargin += shenxia / count;
@@ -114,6 +119,7 @@ public class LikeUsersArea {
                 view.setOnClickListener(mOnClickUser);
             }
 
+            //如果头像数量超过了屏幕，将提示总点赞的人的数目
             TextView textView = new TextView(getActivity());
             textView.setGravity(Gravity.CENTER);
             layout.addView(textView);
@@ -149,7 +155,7 @@ public class LikeUsersArea {
 
         int likes = data.likes;
         final ArrayList<Maopao.Like_user> likeUsers = data.like_users;
-
+        //最后一个是TextView，所以要减一
         int imageCount = likeUsersLayout.getChildCount() - 1;
 
         Log.d("", "ddd disgood " + imageCount + "," + likeUsers.size() + "," + likes);
@@ -159,13 +165,14 @@ public class LikeUsersArea {
         if (likeUsers.size() < imageCount) {
             if (likes <= imageCount) {
                 int i = 0;
+                //显示每个点赞用户的头像
                 for (; i < likeUsers.size(); ++i) {
                     ImageView image = (ImageView) likeUsersLayout.getChildAt(i);
                     image.setVisibility(View.VISIBLE);
 
                     imageLoadTool.loadImage(image, likeUsers.get(i).avatar);
                 }
-
+                //超出部分的头像不显示
                 for (; i < imageCount; ++i) {
                     likeUsersLayout.getChildAt(i).setVisibility(View.GONE);
                 }
@@ -191,6 +198,7 @@ public class LikeUsersArea {
             }
 
         } else {
+            //如果点赞的用户数大于最多显示的头像数，那么头像需按照点赞的用户倒序显示
             --imageCount;
             for (int i = 0; i < imageCount; ++i) {
                 ImageView image = (ImageView) likeUsersLayout.getChildAt(i);
@@ -208,6 +216,7 @@ public class LikeUsersArea {
         for (int i = 0; i < imageCount; ++i) {
             View v = likeUsersLayout.getChildAt(i);
             if (v.getVisibility() == View.VISIBLE) {
+                //设置每一个用户的key，当用户头像被点击时，需要使用
                 v.setTag(likeUsers.get(i).global_key);
             } else {
                 break;

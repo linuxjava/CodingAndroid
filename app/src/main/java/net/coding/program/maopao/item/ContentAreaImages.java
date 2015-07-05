@@ -77,18 +77,26 @@ public class ContentAreaImages extends ContentAreaBase {
         contentMarginBottom = convertView.getResources().getDimensionPixelSize(R.dimen.message_text_margin_bottom);
     }
 
-    // 用来设置冒泡的
+    // 设置冒泡的文字内容
     public void setData(Maopao.MaopaoObject maopaoObject) {
         setDataContent(maopaoObject.content, maopaoObject);
     }
-
+    // 设置冒泡的文字内容
     public void setData(BaseComment comment) {
         setDataContent(comment.content, comment);
     }
 
+    /**
+     * 将解析出现的文本和图片url进行显示
+     * @param s
+     * @param contentObject
+     */
     private void setDataContent(String s, Object contentObject) {
         String data = s;
-
+        /**
+         * 通过HtmlContent.parseMaopao将内容的HTML解析出来
+         * 解析的数据保存在MessageParse中，包括文本和图片url
+         */
         Global.MessageParse maopaoData = HtmlContent.parseMaopao(data);
 
         if (maopaoData.text.isEmpty()) {
@@ -126,6 +134,10 @@ public class ContentAreaImages extends ContentAreaBase {
         setImageUrl(maopaoData.uris);
     }
 
+    /**
+     * 设置显示多图
+     * @param uris
+     */
     protected void setImageUrl(ArrayList<String> uris) {
         if (uris.size() == 0) {
             imageLayout0.setVisibility(View.GONE);
