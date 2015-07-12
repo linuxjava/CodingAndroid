@@ -70,6 +70,7 @@ public class MainActivity extends BaseActivity
     ViewGroup drawer_layout;
 
     boolean mFirstEnter = true;
+    //toolbar上的自定义布局，用于冒泡
     private View actionbarCustom;
 
     @Override
@@ -84,12 +85,12 @@ public class MainActivity extends BaseActivity
         // qq push
         updateNotifyService();
         pushInXiaomi();
-
+        //登陆的背景图片
         LoginBackground loginBackground = new LoginBackground(this);
         loginBackground.update();
 
+        //是不是第一次进入主页面
         mFirstEnter = (savedInstanceState == null);
-
         if (savedInstanceState != null) {
             mSelectPos = savedInstanceState.getInt("pos", 0);
             mTitle = savedInstanceState.getString("mTitle");
@@ -151,10 +152,10 @@ public class MainActivity extends BaseActivity
         startService(intent);
 
         mSpinnerAdapter = new MySpinnerAdapter(getLayoutInflater(), maopao_action_types);
-
+        //设置toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //设置toolbar上的自定义布局
         ActionBar supportActionBar = getSupportActionBar();
         supportActionBar.setCustomView(R.layout.actionbar_custom_spinner);
         actionbarCustom = supportActionBar.getCustomView();
@@ -168,7 +169,7 @@ public class MainActivity extends BaseActivity
                 Fragment fragment;
                 Bundle bundle = new Bundle();
                 mSpinnerAdapter.setCheckPos(position);
-
+                //冒泡选择item的排序方式（时间排序、热门排序、好友排序）
                 switch (position) {
                     case 1:
                         fragment = new MaopaoListFragment_();
@@ -195,7 +196,6 @@ public class MainActivity extends BaseActivity
                 Log.d("", ft == null ? "is null" : "is good");
                 ft.replace(R.id.container, fragment, strings[position]);
                 ft.commit();
-
             }
 
             @Override
@@ -214,6 +214,7 @@ public class MainActivity extends BaseActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         if (mFirstEnter) {
+            //选择默认显示页面
             onNavigationDrawerItemSelected(0);
         }
     }
@@ -290,6 +291,9 @@ public class MainActivity extends BaseActivity
 
     MySpinnerAdapter mSpinnerAdapter;
 
+    /**
+     * 重新设置toolbar上的元素
+     */
     public void restoreActionBar() {
         mTitle = drawer_title[mSelectPos];
         ActionBar actionBar = getSupportActionBar();
@@ -355,6 +359,13 @@ public class MainActivity extends BaseActivity
             return position;
         }
 
+        /**
+         * 返回选中item的显示形式
+         * @param position
+         * @param convertView
+         * @param parent
+         * @return
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
@@ -366,6 +377,13 @@ public class MainActivity extends BaseActivity
             return convertView;
         }
 
+        /**
+         * 返回下拉列表的显示
+         * @param position
+         * @param convertView
+         * @param parent
+         * @return
+         */
         @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {

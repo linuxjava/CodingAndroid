@@ -42,6 +42,7 @@ public class BaseFragment extends Fragment implements NetworkCallback, FootUpdat
 
     private ProgressDialog mProgressDialog;
 
+    /*******************loading ProgressBar的封装**************************/
     protected void showProgressBar(boolean show) {
         showProgressBar(show, "");
     }
@@ -68,10 +69,6 @@ public class BaseFragment extends Fragment implements NetworkCallback, FootUpdat
         }
     }
 
-    public ActionBarActivity getActionBarActivity() {
-        return (ActionBarActivity) getActivity();
-    }
-
     protected void showProgressBar(int messageId) {
         String message = getString(messageId);
         showProgressBar(true, message);
@@ -79,6 +76,10 @@ public class BaseFragment extends Fragment implements NetworkCallback, FootUpdat
 
     protected boolean progressBarIsShowing() {
         return mProgressDialog.isShowing();
+    }
+
+    public ActionBarActivity getActionBarActivity() {
+        return (ActionBarActivity) getActivity();
     }
 
     protected ImageLoadTool getImageLoad() {

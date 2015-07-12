@@ -75,6 +75,7 @@ public class DialogUtil {
 
         final LoadingPopupWindow tmpPopupWindow = popupWindow;
         View popupView = popupWindow.getContentView();
+        //设置loading的title
         if (popupView != null) {
             TextView tvTitlename = (TextView) popupView.findViewById(R.id.tv_titlename);
             if (tvTitlename != null && !title.isEmpty()) {
@@ -131,6 +132,9 @@ public class DialogUtil {
         }
     }
 
+    /**
+     * loading在屏幕中间
+     */
     public static class LoadingPopupWindow extends PopupWindow {
 
         ImageView loadingLogo;

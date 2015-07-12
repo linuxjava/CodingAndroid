@@ -192,6 +192,12 @@ public class Global {
 
     private static final String IMAGE_URL_SCAL = "%s?imageMogr2/thumbnail/!%s";
 
+    /**
+     * 将大图片的url制作成小图片的url
+     * @param view
+     * @param url
+     * @return
+     */
     public static String makeSmallUrl(ImageView view, String url) {
         String realUrl = url.split("\\?")[0];
 

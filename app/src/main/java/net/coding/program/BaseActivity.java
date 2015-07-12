@@ -80,16 +80,7 @@ public class BaseActivity extends UmengActivity implements NetworkCallback {
         }
     };
 
-    protected void showErrorMsg(int code, JSONObject json) {
-        if (code == NetworkImpl.NETWORK_ERROR) {
-            showButtomToast(R.string.connect_service_fail);
-        } else {
-            String msg = Global.getErrorMsg(json);
-            if (!msg.isEmpty()) {
-                showButtomToast(msg);
-            }
-        }
-    }
+
 
     protected ImageLoadTool getImageLoad() {
         return imageLoadTool;
@@ -201,6 +192,29 @@ public class BaseActivity extends UmengActivity implements NetworkCallback {
         dialogTitleLineColor(dialog);
     }
 
+    /**
+     * 设置提示dialog对话框分割线的颜色
+     * @param dialog
+     */
+    public final void dialogTitleLineColor(Dialog dialog) {
+        CustomDialog.dialogTitleLineColor(this, dialog);
+    }
+
+    protected void showErrorMsg(int code, JSONObject json) {
+        if (code == NetworkImpl.NETWORK_ERROR) {
+            showButtomToast(R.string.connect_service_fail);
+        } else {
+            String msg = Global.getErrorMsg(json);
+            if (!msg.isEmpty()) {
+                showButtomToast(msg);
+            }
+        }
+    }
+
+    /**
+     * 普通toast
+     * @param msg
+     */
     protected void showButtomToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
@@ -209,12 +223,21 @@ public class BaseActivity extends UmengActivity implements NetworkCallback {
         Toast.makeText(this, messageId, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * toast在屏幕中间显示
+     * @param msg
+     */
     protected void showMiddleToast(String msg) {
         Toast toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
 
+    /**
+     * 获取图片的icon（需要将大图进行裁剪）
+     * @param view
+     * @param url
+     */
     protected void iconfromNetwork(ImageView view, String url) {
         imageLoadTool.loadImage(view, Global.makeSmallUrl(view, url));
     }
@@ -223,16 +246,17 @@ public class BaseActivity extends UmengActivity implements NetworkCallback {
         imageLoadTool.loadImage(view, Global.makeSmallUrl(view, url), animate);
     }
 
+    /**
+     * 获取图片
+     * @param view
+     * @param url
+     */
     protected void imagefromNetwork(ImageView view, String url) {
         imageLoadTool.loadImageFromUrl(view, url);
     }
 
     protected void imagefromNetwork(ImageView view, String url, DisplayImageOptions options) {
         imageLoadTool.loadImageFromUrl(view, url, options);
-    }
-
-    public final void dialogTitleLineColor(Dialog dialog) {
-        CustomDialog.dialogTitleLineColor(this, dialog);
     }
 
     /**

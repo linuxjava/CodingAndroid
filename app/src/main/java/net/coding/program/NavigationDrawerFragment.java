@@ -92,8 +92,9 @@ public class NavigationDrawerFragment extends BaseFragment implements UnreadNoti
     @AfterViews
     void init() {
         UserObject user = AccountInfo.loadAccount(getActivity());
+        //设置用户信息
         setControlContent(user);
-
+        //设置每一个item的选项
         for (int i = 0; i < radioIds.length; ++i) {
             radios[i] = (RadioButton) getView().findViewById(radioIds[i]);
             radios[i].setOnClickListener(clickItem);
@@ -107,22 +108,34 @@ public class NavigationDrawerFragment extends BaseFragment implements UnreadNoti
         badgeMessage.setVisibility(View.INVISIBLE);
 
         if (mFirstDisplay) {
+            //更新用户信息
             updateUserinfo();
         }
     }
 
+    /**
+     * 点击"意见反馈"
+     * @param view
+     */
     @Click
     protected final void buttonFeedback(View view) {
         FeedbackActivity_.intent(getActivity()).start();
         mDrawerLayout.closeDrawer(mFragmentContainerView);
     }
 
+    /**
+     * 点击用户头像
+     * @param v
+     */
     @Click
     void circleIcon(View v) {
         new ClickSmallImage(this).onClick(v);
         updateUserinfo();
     }
 
+    /**
+     * 点击5个item
+     */
     View.OnClickListener clickItem = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
