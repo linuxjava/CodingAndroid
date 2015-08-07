@@ -116,9 +116,10 @@ public class MaopaoAddActivity extends BaseActivity implements StartActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == mData.size()) {
+                    //选择添加照片
                     startPhotoPickActivity();
-
                 } else {
+                    //查看照片
                     Intent intent = new Intent(MaopaoAddActivity.this, ImagePagerActivity_.class);
                     ArrayList<String> arrayUri = new ArrayList<String>();
                     for (PhotoData item : mData) {
@@ -146,7 +147,7 @@ public class MaopaoAddActivity extends BaseActivity implements StartActivity {
                 updateAddButton();
             }
         });
-
+        //冒泡的草稿
         MaopaoDraft draft = AccountInfo.loadMaopaoDraft(this);
         if (!draft.isEmpty()) {
             mEnterLayout.setText(draft.getInput());
@@ -212,9 +213,10 @@ public class MaopaoAddActivity extends BaseActivity implements StartActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
-
+    //查看照片
     public static final int RESULT_REQUEST_IMAGE = 100;
     public static final int RESULT_REQUEST_FOLLOW = 1002;
+    //选择照片
     public static final int RESULT_REQUEST_PICK_PHOTO = 1003;
     public static final int RESULT_REQUEST_PHOTO = 1005;
     public static final int RESULT_REQUEST_LOCATION = 1006;
@@ -502,17 +504,16 @@ public class MaopaoAddActivity extends BaseActivity implements StartActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-
+            //是否到达了倒数第二张图片，最后一张是没有图片的
             if (position == getCount() - 1) {
                 if (getCount() == (PHOTO_MAX_COUNT + 1)) {
                     holder.image.setVisibility(View.INVISIBLE);
-
                 } else {
+                    //最后一张图片是添加图片
                     holder.image.setVisibility(View.VISIBLE);
                     holder.image.setImageResource(R.drawable.make_maopao_add);
                     holder.uri = "";
                 }
-
             } else {
                 holder.image.setVisibility(View.VISIBLE);
                 PhotoData photoData = mData.get(position);
@@ -551,6 +552,7 @@ public class MaopaoAddActivity extends BaseActivity implements StartActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String mGlobalKey = AccountInfo.loadAccount(this).global_key;
+        //用户key为空则跳转到登陆页面
         if (mGlobalKey.isEmpty()) {
             Intent intent = new Intent(this, LoginActivity_.class);
             this.startActivity(intent);

@@ -67,7 +67,7 @@
                         android:textCursorDrawable="@null"
                         android:textSize="18sp"
                         custom:darkness="true"
-                        android:text="yjtbupt@163.com"/>
+                        android:text="516282426@qq.com"/>
 
                     <net.coding.program.common.LoginEditText
                         android:id="@+id/editPassword"
@@ -85,7 +85,7 @@
                         android:textCursorDrawable="@null"
                         android:textSize="18sp"
                         custom:dark="true"
-                        android:text="1qaz2wsx"/>
+                        android:text="Xiao123456789"/>
 
                     <RelativeLayout
                         android:id="@+id/captchaLayout"

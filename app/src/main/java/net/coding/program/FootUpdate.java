@@ -11,7 +11,6 @@ import java.lang.reflect.Method;
  * Created by chaochen on 14-10-22.
  */
 public class FootUpdate {
-
     View mLayout;
     View mClick;
     View mLoading;

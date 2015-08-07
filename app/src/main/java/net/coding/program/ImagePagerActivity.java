@@ -141,6 +141,7 @@ public class ImagePagerActivity extends UmengActivity {
 
     @Override
     public void onBackPressed() {
+        //没用删除任何照片，则是取消
         if (mDelUrls.isEmpty()) {
             setResult(RESULT_CANCELED);
         } else {
@@ -158,7 +159,6 @@ public class ImagePagerActivity extends UmengActivity {
             case android.R.id.home:
                 onBackPressed();
                 break;
-
             case R.id.action_del_maopao:
                 final int selectPos = pager.getCurrentItem();
                 AlertDialog dialog = new AlertDialog.Builder(this)

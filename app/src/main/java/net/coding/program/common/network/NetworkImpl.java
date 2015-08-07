@@ -45,6 +45,7 @@ public class NetworkImpl {
     public void loadData(String url, RequestParams params, final String tag, final int dataPos, final Object data, Request type) {
         Log.d("", "url " + type + " " + url);
 
+        //如果请求正在进行，则直接返回
         if (mUpdateing.containsKey(tag) && mUpdateing.get(tag)) {
             Log.d("", "url#" + (params == null ? "get " : "post ") + url);
             return;

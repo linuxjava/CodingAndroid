@@ -238,7 +238,6 @@ public class ImagePagerFragment extends BaseFragment {
                                 ((GifImageView) image).setImageURI(uri1);
                             } else if (image instanceof PhotoView) {
                                 ((PhotoView) image).setImageBitmap(loadedImage);
-
                             }
                         } catch (Exception e) {
                             Global.errorLog(e);
